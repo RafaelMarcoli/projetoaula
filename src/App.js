@@ -1,7 +1,8 @@
 import React from "react";
+import Login from "./pages/Login";
 
 function App() {
-  return <h1>ola mundo</h1>;
+  return <Login />;
 }
 
 export default App;
