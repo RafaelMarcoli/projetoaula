@@ -1,14 +1,16 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Login from "../pages/Login";
+import Page404 from "../pages/Page404";
 
-export default function Routes() {
+export default function AppRoutes() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/" Component={Login} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
     </BrowserRouter>
   );
 }
