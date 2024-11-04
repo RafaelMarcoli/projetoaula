@@ -1,5 +1,15 @@
 import React from "react";
 
-export default function login() {
-  return <h1>Pagina de Login</h1>;
+import { Title } from "./styled";
+
+export default function Login() {
+  return (
+    <>
+      <Title>
+        Login
+        <small>Oie</small>
+      </Title>
+      <p>Lorem ipsum dolor sit</p>;
+    </>
+  );
 }
