@@ -7,7 +7,7 @@ import { Container } from "./styles/GlobalStyles";
 function App() {
   return (
     <Container>
-      <Login />;
+      <Login />
       <GlobalStyle />
     </Container>
   );

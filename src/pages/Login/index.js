@@ -9,7 +9,7 @@ export default function Login() {
         Login
         <small>Oie</small>
       </Title>
-      <p>Lorem ipsum dolor sit</p>;
+      <p>Lorem ipsum dolor sit</p>
     </>
   );
 }
