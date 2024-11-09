@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import styled from "styled-components";
-import { primaryDarkColor, primaryColor } from "../config/color";
+import * as colors from "../config/color";
+import "react-toastify/dist/ReactToastify.css";
 
 export default createGlobalStyle`
 * {
@@ -12,8 +13,8 @@ box-sizing: border-box;
 
 body {
   font-family: sans-serif;
-  background: ${primaryDarkColor};
-  color: ${primaryDarkColor};
+  background: ${colors.primaryDarkColor};
+  color: ${colors.primaryDarkColor};
 }
 
 html, body, #root {
@@ -21,7 +22,7 @@ html, body, #root {
 }
 button {
   cursor: pointer;
-  background: ${primaryColor};
+  background: ${colors.primaryColor};
 }
 a {
   text-decoration: none;
@@ -29,6 +30,17 @@ a {
 
 ul {
   list-style: none;
+}
+
+body .Toastify .Toastify__toast-container .Toastify__toast--success {
+  background: ${colors.successColor};
+  color: white;
+  font-weight: 700;
+}
+body .Toastify .Toastify__toast-container .Toastify__toast--error {
+  background: ${colors.errorColor};
+  color: black;
+  font-weight: 700;
 }
 `;
 

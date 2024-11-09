@@ -8,7 +8,7 @@ import Page404 from "../pages/Page404";
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<MyRoute element={Login} isClosed />} />
+      <Route path="/" element={<MyRoute element={Login} />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );
