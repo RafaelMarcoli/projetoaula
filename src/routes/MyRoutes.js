@@ -2,7 +2,11 @@ import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export default function MyRoute({ element: Element, isClosed, ...rest }) {
+export default function MyRoute({
+  element: Element,
+  isClosed = false,
+  ...rest
+}) {
   const isLoggedIn = false;
   const location = useLocation();
 
@@ -14,10 +18,6 @@ export default function MyRoute({ element: Element, isClosed, ...rest }) {
 
   return <Element {...rest} />;
 }
-
-MyRoute.defaultProps = {
-  isClosed: false,
-};
 
 MyRoute.propTypes = {
   element: PropTypes.elementType.isRequired,
