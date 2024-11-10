@@ -4,7 +4,7 @@ const initialState = {
 };
 
 // Redefina seu reducer para trabalhar com o estado inicial.
-export default function (state = initialState, action) {
+export default function exemplos(state = initialState, action) {
   switch (action.type) {
     case "BOTAO_CLICADO": {
       const newState = { ...state };
