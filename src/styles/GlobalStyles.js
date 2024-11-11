@@ -23,6 +23,15 @@ html, body, #root {
 button {
   cursor: pointer;
   background: ${colors.primaryColor};
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 10px 20px;
+  transition: all 300ms;
+}
+button:hover {
+ filter: brightness(80%);
 }
 a {
   text-decoration: none;
@@ -36,11 +45,13 @@ body .Toastify .Toastify__toast-container .Toastify__toast--success {
   background: ${colors.successColor};
   color: white;
   font-weight: 700;
+  border-radius: 5px;
 }
 body .Toastify .Toastify__toast-container .Toastify__toast--error {
   background: ${colors.errorColor};
   color: black;
   font-weight: 700;
+  border-radius: 5px;
 }
 `;
 
