@@ -1,13 +1,14 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
 
 export default function MyRoute({
   element: Element,
   isClosed = false,
   ...rest
 }) {
-  const isLoggedIn = false;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const location = useLocation();
 
   if (isClosed && !isLoggedIn) {
