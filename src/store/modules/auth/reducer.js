@@ -16,8 +16,41 @@ export default function exemplos(state = initialState, action) {
       newState.user = action.payload.user;
       return newState;
     }
+
     case types.LOGIN_FAILURE: {
       const newState = { ...initialState };
+      return newState;
+    }
+
+    case types.LOGIN_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
+      return newState;
+    }
+    case types.REGISTER_REQUEST: {
+      const newState = { ...state };
+      newState.isLoading = true;
+      return newState;
+    }
+    case types.REGISTER_UPDATED_SUCCESS: {
+      const newState = { ...state };
+      newState.user = {
+        ...state.user,
+        nome: action.payload.nome,
+        email: action.payload.email,
+      };
+      newState.isLoading = false;
+      return newState;
+    }
+    case types.REGISTER_CREATED_SUCCESS: {
+      const newState = { ...state };
+      newState.isLoading = false;
+      return newState;
+    }
+
+    case types.REGISTER_FAILURE: {
+      const newState = { ...state };
+      newState.isLoading = false;
       return newState;
     }
 
