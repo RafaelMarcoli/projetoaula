@@ -2,6 +2,12 @@ import styled from "styled-components";
 
 export const AlunoContainer = styled.div`
   margin-top: 15px;
+  .icon-container {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+  }
   div {
     display: flex;
     align-items: center;
