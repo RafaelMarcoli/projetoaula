@@ -5,9 +5,11 @@ import { toast } from "react-toastify";
 import { get } from "lodash";
 import { useDispatch } from "react-redux";
 import * as actions from "../../store/modules/auth/action";
+import { FaUserCircle, FaEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 import { Container } from "../../styles/GlobalStyles";
-import { Form } from "./styled";
+import { Form, ProfilePicture } from "./styled";
 import axios from "../../service/axios";
 
 export default function Aluno() {
@@ -20,6 +22,7 @@ export default function Aluno() {
   const [idade, setIdade] = useState("");
   const [peso, setPeso] = useState("");
   const [altura, setAltura] = useState("");
+  const [foto, setFoto] = useState("");
 
   useEffect(() => {
     if (!id) return;
@@ -27,7 +30,9 @@ export default function Aluno() {
     async function getData() {
       try {
         const { data } = await axios.get(`/alunos/${id}`);
-        // const Foto = get(data, "Fotos[0].url", "");
+        const Foto = get(data, "Fotos[0].url", "");
+
+        setFoto(Foto);
 
         setNome(data.nome);
         setSobrenome(data.sobrenome);
@@ -44,7 +49,7 @@ export default function Aluno() {
       }
     }
     getData();
-  }, [id]);
+  }, [id, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -121,6 +126,15 @@ export default function Aluno() {
   return (
     <Container>
       <h1>{id ? "Editar Aluno" : "Criar Aluno"}</h1>
+
+      {id && (
+        <ProfilePicture>
+          {foto ? <img src={foto} alt={nome} /> : <FaUserCircle size={100} />}
+          <Link to={`/fotos/${id}`}>
+            <FaEdit size={17} color="blue" />
+          </Link>
+        </ProfilePicture>
+      )}
 
       <Form onSubmit={handleSubmit}>
         <input
