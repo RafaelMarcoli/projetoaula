@@ -1,10 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "../../styles/GlobalStyles";
+import { Title, Form } from "./styled";
+import axios from "../../service/axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { get } from "lodash";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import * as actions from "../../store/modules/auth/action";
 
 export default function Fotos() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const [foto, setFoto] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`/alunos/${id}`);
+        setFoto(get(data, "Fotos[0].url", ""));
+      } catch {
+        toast.error("Error ao obter imagem");
+        navigate("/");
+      }
+    };
+
+    getData();
+  }, [navigate]);
+
+  const handleChange = async (e) => {
+    const file = e.target.files[0];
+    const fotoURL = URL.createObjectURL(file);
+    setFoto(fotoURL);
+
+    const formData = new FormData();
+    formData.append("aluno_id", id);
+    formData.append("foto", file);
+
+    try {
+      await axios.post("/fotos/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success("Foto enviada com sucesso");
+    } catch (err) {
+      const { status } = get(err, "response", "");
+      toast.error("Error ao enviar Foto");
+
+      if (status === 401) dispatch(actions.loginFailure());
+    }
+  };
+
   return (
     <Container>
-      <h1>Fotos</h1>
+      <Title>Fotos</Title>
+
+      <Form>
+        <label htmlFor="foto">
+          {foto ? <img src={foto} alt="foto" /> : "Selecionar"}
+          <input type="file" id="foto" onChange={handleChange} />
+        </label>
+      </Form>
     </Container>
   );
 }
