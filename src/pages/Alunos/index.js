@@ -17,6 +17,7 @@ import { toast } from "react-toastify";
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
+
   useEffect(() => {
     async function getData() {
       const response = await axios.get("/alunos");
@@ -44,9 +45,9 @@ export default function Alunos() {
       const status = get(err, "response.status", 0);
 
       if (status === 401) {
-        toast.error("Voce precisa fazer login");
+        toast.error("Você precisa fazer login");
       } else {
-        toast.error("Ocorreu um error ao excluir aluno");
+        toast.error("Ocorreu um erro ao excluir aluno");
       }
     }
   };
@@ -62,7 +63,11 @@ export default function Alunos() {
           <div key={String(aluno.id)}>
             <Pictures>
               {get(aluno, "Fotos[0].url", false) ? (
-                <img src={aluno.Fotos[0].url} alt="" />
+                // Substituindo 'http://' por '/uploads/' para usar o proxy
+                <img
+                  src={aluno.Fotos[0].url.replace("http://", "/uploads/")}
+                  alt=""
+                />
               ) : (
                 <FaUserCircle size={36} />
               )}

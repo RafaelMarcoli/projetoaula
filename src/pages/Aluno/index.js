@@ -32,8 +32,10 @@ export default function Aluno() {
         const { data } = await axios.get(`/alunos/${id}`);
         const Foto = get(data, "Fotos[0].url", "");
 
-        setFoto(Foto);
+        // Alterando a URL da foto para usar o proxy
+        const fotoUrl = Foto ? Foto.replace("http://", "/uploads/") : "";
 
+        setFoto(fotoUrl);
         setNome(data.nome);
         setSobrenome(data.sobrenome);
         setEmail(data.email);
@@ -73,7 +75,7 @@ export default function Aluno() {
       formErros = true;
     }
     if (!isFloat(String(peso))) {
-      toast.error("Peso Invalida");
+      toast.error("Peso Invalido");
       formErros = true;
     }
     if (!isFloat(String(altura))) {
