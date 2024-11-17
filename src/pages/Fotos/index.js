@@ -27,7 +27,7 @@ export default function Fotos() {
     };
 
     getData();
-  }, [navigate]);
+  }, [id, navigate]);
 
   const handleChange = async (e) => {
     const file = e.target.files[0];
