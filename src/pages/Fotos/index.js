@@ -22,7 +22,7 @@ export default function Fotos() {
         const fotoUrl = get(data, "Fotos[0].url", "");
 
         // Substituindo 'http://' por '/uploads/' para usar o proxy
-        const proxyFotoUrl = fotoUrl.replace("http://", "/uploads/");
+        const proxyFotoUrl = fotoUrl.replace("http://", "/images/");
 
         setFoto(proxyFotoUrl);
       } catch {

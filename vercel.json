@@ -5,8 +5,8 @@
       "destination": "http://34.151.248.174/:path*"
     },
     {
-      "source": "/uploads/:path*",
-      "destination": "http://34.151.248.174/uploads/:path*"
+      "source": "/images/:path*",
+      "destination": "http://34.151.248.174/images/:path*"
     }
   ]
 }

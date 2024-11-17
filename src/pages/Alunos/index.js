@@ -65,7 +65,7 @@ export default function Alunos() {
               {get(aluno, "Fotos[0].url", false) ? (
                 // Substituindo 'http://' por '/uploads/' para usar o proxy
                 <img
-                  src={aluno.Fotos[0].url.replace("http://", "/uploads/")}
+                  src={aluno.Fotos[0].url.replace("http://", "/images/")}
                   alt=""
                 />
               ) : (
