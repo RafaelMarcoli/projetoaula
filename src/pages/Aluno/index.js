@@ -32,8 +32,8 @@ export default function Aluno() {
         const { data } = await axios.get(`/alunos/${id}`);
         const Foto = get(data, "Fotos[0].url", "");
 
-        // Alterando a URL da foto para usar o proxy
-        const fotoUrl = Foto ? Foto.replace("http://", "/images/") : "";
+        // Alterando a URL da foto para usar o proxy e garantir que a URL tenha https
+        const fotoUrl = Foto ? Foto.replace("http://", "https://") : "";
 
         setFoto(fotoUrl);
         setNome(data.nome);

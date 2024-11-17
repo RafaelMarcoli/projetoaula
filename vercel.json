@@ -6,7 +6,7 @@
     },
     {
       "source": "/images/:path*",
-      "destination": "http://34.151.248.174/images/:path*"
+      "destination": "https://34.151.248.174/images/:path*"
     }
   ]
 }

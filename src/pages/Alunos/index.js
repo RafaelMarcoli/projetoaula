@@ -63,10 +63,10 @@ export default function Alunos() {
           <div key={String(aluno.id)}>
             <Pictures>
               {get(aluno, "Fotos[0].url", false) ? (
-                // Substituindo 'http://' por '/uploads/' para usar o proxy
+                // Substituindo 'http://' por '/images/' para usar o proxy
                 <img
                   src={aluno.Fotos[0].url.replace("http://", "/images/")}
-                  alt=""
+                  alt={aluno.nome} // Melhorando a acessibilidade com o nome do aluno
                 />
               ) : (
                 <FaUserCircle size={36} />
@@ -84,7 +84,7 @@ export default function Alunos() {
 
               <FaExclamation
                 size={16}
-                display="none"
+                style={{ display: "none" }} // Corrigindo o display para ser via style inline
                 cursor="pointer"
                 color="#0197F6"
                 onClick={(e) => handleDelete(e, aluno.id, index)}

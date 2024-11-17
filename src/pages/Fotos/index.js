@@ -21,12 +21,14 @@ export default function Fotos() {
         const { data } = await axios.get(`/alunos/${id}`);
         const fotoUrl = get(data, "Fotos[0].url", "");
 
-        // Substituindo 'http://' por '/uploads/' para usar o proxy
-        const proxyFotoUrl = fotoUrl.replace("http://", "/images/");
+        // Substituindo 'http://' por '/images/' para usar o proxy
+        const proxyFotoUrl = fotoUrl
+          ? fotoUrl.replace("http://", "/images/")
+          : "";
 
         setFoto(proxyFotoUrl);
       } catch {
-        toast.error("Error ao obter imagem");
+        toast.error("Erro ao obter imagem");
         navigate("/");
       }
     };
@@ -52,7 +54,7 @@ export default function Fotos() {
       toast.success("Foto enviada com sucesso");
     } catch (err) {
       const { status } = get(err, "response", "");
-      toast.error("Error ao enviar Foto");
+      toast.error("Erro ao enviar foto");
 
       if (status === 401) dispatch(actions.loginFailure());
     }
