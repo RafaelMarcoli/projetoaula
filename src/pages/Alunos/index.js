@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 
 import { Container } from "../../styles/GlobalStyles";
-import Loading from "../../components/Loading";
 
 import { AlunoContainer, Pictures, NovoAluno } from "./styled";
 
@@ -18,13 +17,10 @@ import { toast } from "react-toastify";
 
 export default function Alunos() {
   const [alunos, setAlunos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     async function getData() {
-      setIsLoading(true);
       const response = await axios.get("/alunos");
       setAlunos(response.data);
-      setIsLoading(false);
     }
 
     getData();
@@ -57,7 +53,6 @@ export default function Alunos() {
 
   return (
     <Container>
-      <Loading isLoading={isLoading} />
       <h1>Alunos</h1>
       <NovoAluno to="/aluno/">
         <button>Cadastrar Aluno</button>
