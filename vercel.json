@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "http://34.151.248.174/:path*"
+    },
+    {
+      "source": "/uploads/:path*",
+      "destination": "http://34.151.248.174/uploads/:path*"
     }
   ]
 }

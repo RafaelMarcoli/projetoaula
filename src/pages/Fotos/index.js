@@ -19,7 +19,12 @@ export default function Fotos() {
     const getData = async () => {
       try {
         const { data } = await axios.get(`/alunos/${id}`);
-        setFoto(get(data, "Fotos[0].url", ""));
+        const fotoUrl = get(data, "Fotos[0].url", "");
+
+        // Substituindo 'http://' por '/uploads/' para usar o proxy
+        const proxyFotoUrl = fotoUrl.replace("http://", "/uploads/");
+
+        setFoto(proxyFotoUrl);
       } catch {
         toast.error("Error ao obter imagem");
         navigate("/");
