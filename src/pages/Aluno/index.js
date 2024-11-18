@@ -32,10 +32,7 @@ export default function Aluno() {
         const { data } = await axios.get(`/alunos/${id}`);
         const Foto = get(data, "Fotos[0].url", "");
 
-        // Substitui http:// por https:// na URL da foto, se necessário
-        const secureFotoUrl = Foto ? Foto.replace("http://", "https://") : "";
-
-        setFoto(secureFotoUrl);
+        setFoto(Foto);
 
         setNome(data.nome);
         setSobrenome(data.sobrenome);
@@ -76,7 +73,7 @@ export default function Aluno() {
       formErros = true;
     }
     if (!isFloat(String(peso))) {
-      toast.error("Peso Invalido");
+      toast.error("Peso Invalida");
       formErros = true;
     }
     if (!isFloat(String(altura))) {
@@ -89,7 +86,7 @@ export default function Aluno() {
 
     try {
       if (id) {
-        // Editando
+        //Editando
         await axios.put(`/alunos/${id}`, {
           nome,
           sobrenome,
@@ -100,7 +97,7 @@ export default function Aluno() {
         });
         toast.success("Aluno(a) editado(a) com sucesso");
       } else {
-        // Criando
+        //Criando
         const { data } = await axios.post(`/alunos/`, {
           nome,
           sobrenome,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../../styles/GlobalStyles";
 import { Title, Form } from "./styled";
-import axios from "../../service/axios"; // Mantém a configuração baseURL "/api"
+import axios from "../../service/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { get } from "lodash";
 import { toast } from "react-toastify";
@@ -19,14 +19,7 @@ export default function Fotos() {
     const getData = async () => {
       try {
         const { data } = await axios.get(`/alunos/${id}`);
-        const fotoUrl = get(data, "Fotos[0].url", "");
-
-        // Verifica se a URL da imagem começa com "http://", se sim, substitui por "https://"
-        const proxyFotoUrl = fotoUrl
-          ? fotoUrl.replace("http://", "https://") // Alterando http para https
-          : "";
-
-        setFoto(proxyFotoUrl);
+        setFoto(get(data, "Fotos[0].url", ""));
       } catch {
         toast.error("Error ao obter imagem");
         navigate("/");
