@@ -32,10 +32,11 @@ export default function Aluno() {
         const { data } = await axios.get(`/alunos/${id}`);
         const Foto = get(data, "Fotos[0].url", "");
 
-        // Alterando a URL da foto para usar o proxy e garantir que a URL tenha https
-        const fotoUrl = Foto ? Foto.replace("http://", "https://") : "";
+        // Substitui http:// por https:// na URL da foto, se necessário
+        const secureFotoUrl = Foto ? Foto.replace("http://", "https://") : "";
 
-        setFoto(fotoUrl);
+        setFoto(secureFotoUrl);
+
         setNome(data.nome);
         setSobrenome(data.sobrenome);
         setEmail(data.email);
@@ -88,7 +89,7 @@ export default function Aluno() {
 
     try {
       if (id) {
-        //Editando
+        // Editando
         await axios.put(`/alunos/${id}`, {
           nome,
           sobrenome,
@@ -99,7 +100,7 @@ export default function Aluno() {
         });
         toast.success("Aluno(a) editado(a) com sucesso");
       } else {
-        //Criando
+        // Criando
         const { data } = await axios.post(`/alunos/`, {
           nome,
           sobrenome,

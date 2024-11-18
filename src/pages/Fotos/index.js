@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../../styles/GlobalStyles";
 import { Title, Form } from "./styled";
-import axios from "../../service/axios";
+import axios from "../../service/axios"; // Mantém a configuração baseURL "/api"
 import { useNavigate, useParams } from "react-router-dom";
 import { get } from "lodash";
 import { toast } from "react-toastify";
@@ -21,14 +21,14 @@ export default function Fotos() {
         const { data } = await axios.get(`/alunos/${id}`);
         const fotoUrl = get(data, "Fotos[0].url", "");
 
-        // Substituindo 'http://' por '/images/' para usar o proxy
+        // Verifica se a URL da imagem começa com "http://", se sim, substitui por "https://"
         const proxyFotoUrl = fotoUrl
-          ? fotoUrl.replace("http://", "/images/")
+          ? fotoUrl.replace("http://", "https://") // Alterando http para https
           : "";
 
         setFoto(proxyFotoUrl);
       } catch {
-        toast.error("Erro ao obter imagem");
+        toast.error("Error ao obter imagem");
         navigate("/");
       }
     };
@@ -54,7 +54,7 @@ export default function Fotos() {
       toast.success("Foto enviada com sucesso");
     } catch (err) {
       const { status } = get(err, "response", "");
-      toast.error("Erro ao enviar foto");
+      toast.error("Error ao enviar Foto");
 
       if (status === 401) dispatch(actions.loginFailure());
     }
